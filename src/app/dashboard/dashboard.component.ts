@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { SkillService } from '../skill.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -26,15 +26,18 @@ export class DashboardComponent implements OnInit {
   transition: string;
   cards: Array<any>;
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private skillService: SkillService) { }
 
   ngOnInit() {
-    this.httpClient.get('/api/skills').subscribe((ret: Array<any>) => {
-      this.opacity = 0
-      this.transition = 'opacity 1s';
-      this.cards = ret;
-      this.loading = false;
-    });
+    this.getSkills();
   }
 
+  getSkills() {
+    this.skillService.getSkills().subscribe(skills => {
+      this.opacity = 0
+      this.transition = 'opacity 1s';
+      this.cards = skills;
+      this.loading = false;
+    })
+  }
 }

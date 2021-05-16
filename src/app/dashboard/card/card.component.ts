@@ -1,5 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, Input } from '@angular/core';
+import { Skill } from 'src/app/skill';
+import { SkillService } from 'src/app/skill.service';
 
 @Component({
   selector: 'app-card',
@@ -10,23 +11,23 @@ export class CardComponent implements OnInit {
 
   loading: boolean;
 
-  @Input() card;
-  constructor(private httpClient: HttpClient) { }
+  @Input() card: Skill;
+  constructor(private skillService: SkillService) { }
 
   ngOnInit() {
   }
 
-  onLike(card: any){
+  onLike(card: Skill){
     this.loading = true;
     const likes = {...card, likes: card.likes + 1};
-    this.httpClient.put(`/api/skills/${card.id}`, likes).subscribe((ret) => {
-      this.card = ret;
+    this.skillService.updateSkill(likes).subscribe(skill => {
+      this.card = skill;
       this.loading = false;
     });
     // TODO: incrementar o like, salvar via rest
   }
 
-  onShare(card: any){
+  onShare(){
     window.open('https://www.linkedin.com/in/rmteodoro', '_blank');
     // TODO: abrir o link do seu linkedin
   }
