@@ -1,3 +1,41 @@
 .example-card {
-    max-width: 400px;
-  }
+  margin: auto;
+  max-width: 400px;
+}
+.mat-ripple {
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+  margin: -16px -16px 16px -16px !important;
+  padding: 16px 16px 0 16px;
+}
+.mat-card-image {
+  cursor: pointer;
+  margin: 0 -16px;
+}
+.mat-title {
+  color: #ff4081;
+}
+.mat-card-content, .mat-card-actions {
+  color: #747373;
+}
+button span {
+  margin-left: 0.5rem;
+}
+@keyframes spinner {
+  to {transform: rotate(360deg);}
+}
+.spinner:before {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin-top: -10px;
+  margin-left: -10px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  border-top-color: #000000;
+  animation: spinner .8s linear infinite;
+}

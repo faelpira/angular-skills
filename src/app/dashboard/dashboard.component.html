@@ -1,2 +1,7 @@
 <!--TODO: melhorar o layout dos cards para exibir ao menos 2 por linha em telas > md, e pequenas (sm) 1 -->
-<app-card [card]="card" *ngFor="let card of cards"></app-card>
+
+<div *ngIf="loading" class="loading-container" [ngStyle]="{'opacity': opacity, 'transition': transition}">
+    <div data-text="My Skills ..." class="loading-text">My Skills ...</div>
+</div>
+
+<app-card fxFlex="33%" fxFlex.md="50%" fxFlex.sm="100%" fxFlex.xs="100%" [@flyInOut]="'in'" [card]="card" *ngFor="let card of cards"></app-card>
